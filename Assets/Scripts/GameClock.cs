@@ -1,0 +1,102 @@
+using UnityEngine;
+using TMPro;
+
+public class GameClock : MonoBehaviour
+{
+    [Header("UI References")]
+    public TextMeshProUGUI clockText; 
+    public GameObject winScreenObject; // Drag your Win_Screen object here (the one with the black background)
+
+    [Header("Settings")]
+    public float secondsPerHour = 60f; // 1 hour in-game = 60 real seconds
+
+    private int currentHour = 12;      // Start at 12 AM
+    private float hourTimer = 0f;
+    private bool gameEnded = false;
+
+    void Start()
+    {
+        // Make sure the win screen starts hidden
+        if (winScreenObject != null) 
+        {
+            winScreenObject.SetActive(false);
+        }
+        
+        UpdateClockDisplay();
+    }
+
+    void Update()
+    {
+        if (gameEnded) return;
+
+        // Keep track of time passing
+        hourTimer += Time.deltaTime;
+
+        // When the timer exceeds the limit, move to the next hour
+        if (hourTimer >= secondsPerHour)
+        {
+            hourTimer = 0f;
+            AdvanceHour();
+        }
+    }
+
+    void AdvanceHour()
+    {
+        if (currentHour == 12) 
+        {
+            currentHour = 1;
+        }
+        else 
+        {
+            currentHour++;
+        }
+
+        UpdateClockDisplay();
+
+        // Check for victory condition
+        if (currentHour == 6)
+        {
+            WinGame();
+        }
+    }
+
+    void UpdateClockDisplay()
+    {
+        // Formats the display nicely (e.g., "12 AM", "1 AM")
+        string amPm = (currentHour == 6 || currentHour < 6 || currentHour == 12) ? "AM" : "PM";
+        clockText.text = currentHour + " " + amPm;
+    }
+
+    void WinGame()
+    {
+        gameEnded = true;
+        Debug.Log("6 AM! You survived the night!");
+        
+        // 1. Show the victory screen overlay (turns on the black background and texts)
+        if (winScreenObject != null)
+        {
+            winScreenObject.SetActive(true);
+        }
+
+        // 2. Free the mouse cursor so the player can safely exit to a menu
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // 3. Disable camera movement scripts automatically
+        // This finds any custom scripts attached to your main camera and shuts them down
+        if (Camera.main != null)
+        {
+            MonoBehaviour[] cameraScripts = Camera.main.GetComponents<MonoBehaviour>();
+            foreach (MonoBehaviour script in cameraScripts)
+            {
+                if (script != this) 
+                {
+                    script.enabled = false;
+                }
+            }
+        }
+
+        // 4. Stop the game time completely
+        Time.timeScale = 0f; 
+    }
+}
