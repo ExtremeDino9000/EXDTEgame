@@ -2,13 +2,18 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))] // Automatically ensures the poster has a speaker component
 public class PosterEasterEgg : MonoBehaviour
+
 {
+    [Header("Model")]
+    public GameObject goldenFreddyModel;
+    
     [Header("Textures")]
-    public Texture normalTexture;  // Your regular Freddy poster
-    public Texture creepyTexture;  // The Golden Freddy poster
+    public Texture normalTexture;  // Regular Freddy poster
+    public Texture creepyTexture;  // Golden Freddy poster
 
     [Header("Audio")]
-    public AudioClip creepySound;  // Drag your whisper, giggle, or distortion sound here
+    public AudioClip creepySound;
+    public AudioClip officePresenceLoop;
 
     [Header("Settings")]
     [Range(0, 100)] public float chanceToChange = 5f; // % chance to change
@@ -63,6 +68,7 @@ public class PosterEasterEgg : MonoBehaviour
         if (posterRenderer != null && creepyTexture != null)
         {
             posterRenderer.material.mainTexture = creepyTexture;
+            SpawnGoldenFreddy();
             Debug.Log("The poster has changed...");
         }
 
@@ -91,5 +97,38 @@ public class PosterEasterEgg : MonoBehaviour
     public bool IsPosterCreepy()
     {
         return isCreepy;
+    }
+
+    public void SpawnGoldenFreddy()
+    {
+        if (goldenFreddyModel != null)
+        {
+            goldenFreddyModel.SetActive(true);
+        }
+
+        if (audioSource != null && officePresenceLoop != null)
+        {
+            audioSource.clip = officePresenceLoop;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
+        Invoke("DespawnGoldenFreddy", 5f);
+    }
+
+    public void DespawnGoldenFreddy()
+    {
+        if (goldenFreddyModel != null)
+        {
+            goldenFreddyModel.SetActive(false);
+        }
+
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            audioSource.loop = false;
+        }
+
+        posterRenderer.material.mainTexture = normalTexture;
     }
 }

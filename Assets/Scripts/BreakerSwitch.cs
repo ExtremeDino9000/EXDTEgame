@@ -5,12 +5,15 @@ public class BreakerSwitch : MonoBehaviour
     [Header("Lights to Control")]
     public Light mainRoomLight; // Drag your main room light here
 
+    [Header("Enemy Reference")]
+    public FrozenFreddy frozenFreddyScript; // Drag your Frozen Freddy manager here
+
     [Header("Switch Settings")]
     public Transform switchHandle; // OPTIONAL: Drag the moving part of the switch here
     public float offRotationX = -30f;
     public float onRotationX = 30f;
 
-    private bool isLightOn = true;
+    public bool isLightOn = true;
 
     void Start()
     {
@@ -22,7 +25,7 @@ public class BreakerSwitch : MonoBehaviour
         UpdateSwitchVisual();
     }
 
-    // This is the function our interaction script will call
+    // This is the function your interaction script needs to call!
     public void ToggleLight()
     {
         isLightOn = !isLightOn;
@@ -30,6 +33,13 @@ public class BreakerSwitch : MonoBehaviour
         if (mainRoomLight != null)
         {
             mainRoomLight.enabled = isLightOn;
+        }
+
+        // --- NEW: Tell Frozen Freddy if the main lights are OFF ---
+        if (frozenFreddyScript != null)
+        {
+            // If isLightOn is true, then areLightsOff is false (and vice versa)
+            frozenFreddyScript.UpdateLightsState(!isLightOn);
         }
 
         UpdateSwitchVisual();

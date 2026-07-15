@@ -21,7 +21,7 @@ public class OfficeUI : MonoBehaviour
             temperatureText.text = "TEMP: " + roundedTemp + "°C";
 
             // OPTIONAL COLOR CHANGE: Turn text red if Foxy is getting aggressive (> 10°C)
-            if (currentTemp > 10f)
+            if (currentTemp > 20f)
             {
                 temperatureText.color = Color.red;
             }

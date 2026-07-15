@@ -26,8 +26,8 @@ public class CameraFrozenFoxy : MonoBehaviour
 
         float currentTemp = tempSystem.GetTemperature();
 
-        // FOXY MECHANIC: Aggressive only if temperature is above 10°C
-        if (currentTemp > 10f)
+        // FOXY MECHANIC: Aggressive only if temperature is above 20°C
+        if (currentTemp > 20f)
         {
             aggressionMeter += aggressionMultiplier * Time.deltaTime;
 
@@ -38,8 +38,8 @@ public class CameraFrozenFoxy : MonoBehaviour
         }
         else
         {
-            // If the player successfully cools the office below 10°C, Foxy calms down over time
-            aggressionMeter -= 10f * Time.deltaTime;
+            // If the player successfully cools the office below 20°C, Foxy calms down over time
+            aggressionMeter -= 20f * Time.deltaTime;
             if (aggressionMeter < 0f) aggressionMeter = 0f;
         }
 
