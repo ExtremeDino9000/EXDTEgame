@@ -98,7 +98,7 @@ public class FrozenFreddy : MonoBehaviour
             {
                 if (officeAudioSource != null && ventThumpSound != null)
                 {
-                    officeAudioSource.PlayOneShot(ventThumpSound);
+                    officeAudioSource.PlayOneShot(ventThumpSound, 0.6f);
                 }
             }
         }

@@ -13,6 +13,10 @@ public class BreakerSwitch : MonoBehaviour
     public float offRotationX = -30f;
     public float onRotationX = 30f;
 
+    [Header("Audio Settings")]
+    public AudioSource officeAudioSource;
+    public AudioClip switchSound;
+
     public bool isLightOn = true;
 
     void Start()
@@ -32,6 +36,7 @@ public class BreakerSwitch : MonoBehaviour
 
         if (mainRoomLight != null)
         {
+            PlaySwitchSound();
             mainRoomLight.enabled = isLightOn;
         }
 
@@ -54,5 +59,10 @@ public class BreakerSwitch : MonoBehaviour
             float targetX = isLightOn ? onRotationX : offRotationX;
             switchHandle.localRotation = Quaternion.Euler(targetX, 0f, 0f);
         }
+    }
+
+    void PlaySwitchSound()
+    {
+        officeAudioSource.PlayOneShot(switchSound, 0.4f);
     }
 }

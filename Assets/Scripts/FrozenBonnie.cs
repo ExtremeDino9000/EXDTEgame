@@ -12,6 +12,10 @@ public class FrozenBonnie : MonoBehaviour
     [Range(0, 20)] public int AILevel = 5;  // Higher number = moves faster
     public float jumpscareTimerLimit = 4f; // Seconds player has to flash him at Stage 2
 
+    [Header("Audio Settings")]
+    public AudioSource officeAudioSource;
+    public AudioClip movementSound;
+
     private int currentStage = 0;
     private float movementTimer;
     private float jumpscareTimer;
@@ -57,6 +61,7 @@ public class FrozenBonnie : MonoBehaviour
         int roll = Random.Range(1, 21);
         if (roll <= AILevel)
         {
+            PlayAdvanceSound();
             currentStage++;
             TeleportToStage(currentStage);
             Debug.Log($"Bonnie advanced to Stage {currentStage}!");
@@ -105,5 +110,13 @@ public class FrozenBonnie : MonoBehaviour
     {
         currentStage = 3;
         Debug.Log("GAME OVER: Frozen Bonnie jumpscared you through the hole!");
+    }
+
+    void PlayAdvanceSound()
+    {
+        if (officeAudioSource != null && movementSound != null)
+        {
+            officeAudioSource.PlayOneShot(movementSound, 0.1f);
+        }
     }
 }
