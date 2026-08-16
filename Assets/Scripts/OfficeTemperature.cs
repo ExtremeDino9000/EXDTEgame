@@ -9,10 +9,7 @@ public class OfficeTemperature : MonoBehaviour
     public Image fadeScreenImage;
 
     [Header("Game Over UI Components")]
-    [Tooltip("Drag your hidden DeathText object here.")]
-    public GameObject deathTextObject;
-    [Tooltip("Drag your hidden RestartButton object here.")]
-    public GameObject restartButtonObject;
+    public GameObject gameOverUI;
 
     [Header("Temperature Settings")]
     public float currentTemperature = 15f;
@@ -102,8 +99,7 @@ public class OfficeTemperature : MonoBehaviour
         }
 
         // 2. Reveal the "You Died" text and the Restart Button
-        if (deathTextObject != null) deathTextObject.SetActive(true);
-        if (restartButtonObject != null) restartButtonObject.SetActive(true);
+        if (gameOverUI != null) gameOverUI.SetActive(true);
 
         // 3. STOP THE GAME CLOCK: This freezes AI, animations, and timers entirely!
         Time.timeScale = 0f; 

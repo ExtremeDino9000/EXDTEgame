@@ -7,6 +7,13 @@ public class CameraFrozenFoxy : MonoBehaviour
     public OfficeTemperature tempSystem; // Drag your object with the OfficeTemperature script here
     public VideoPlayer jumpscareVideo;
 
+    [Header("UI Elements")]
+    public GameObject gameoverscreen;
+
+    [Header("Sounds")]
+    public AudioSource jumpscareAudioSource;
+    public AudioClip scareSound;
+
     [Header("Foxy Aggression Settings")]
     public float aggressionMeter = 0f;
     public float maxAggressionBeforeJumpscare = 100f;
@@ -78,7 +85,26 @@ public class CameraFrozenFoxy : MonoBehaviour
         Debug.Log("FOXY JUMPSCARE! Office temperature was too high!");
         if (jumpscareVideo != null)
         {
+            jumpscareAudioSource.PlayOneShot(scareSound);
             jumpscareVideo.Play();
+            //jumpscareVideo.loopPointReached += OnJumpscareFinished;
+            Invoke("ShowGameOver", 3f);
         }
+    }
+
+    void OnJumpscareFinished(VideoPlayer vp)
+    {
+        //jumpscareVideo.loopPointReached -= OnJumpscareFinished;
+        ShowGameOver();
+    }
+
+    void ShowGameOver()
+    {
+        if (gameoverscreen != null)
+        {
+            gameoverscreen.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
     }
 }

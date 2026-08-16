@@ -21,6 +21,8 @@ public class FrozenBonnie : MonoBehaviour
     private float jumpscareTimer;
     private bool isBeingFlashed = false;
 
+    public CameraGlitchEffect glitchSystem;
+
     void Start()
     {
         // Put Bonnie at the very back of the closet when the game starts
