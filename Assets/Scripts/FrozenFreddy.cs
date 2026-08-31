@@ -8,11 +8,11 @@ public class FrozenFreddy : MonoBehaviour
 
     [Header("State Tracking")]
     public int currentStage = 0; 
-    public float gracePeriod = 6f; // Time player has to turn off lights before a jumpscare
+    public float gracePeriod = 6f;
 
     [Header("Retreat Settings")]
-    public float retreatDelay = 3f; // NEW: How many seconds the player must sit in the dark before Freddy leaves
-    private float retreatTimer = 0f;  // NEW: Tracks how long the lights have been off
+    public float retreatDelay = 3f; 
+    private float retreatTimer = 0f;
 
     [Header("Teleportation Setup")]
     public GameObject frozenFreddyModel; 
@@ -22,11 +22,22 @@ public class FrozenFreddy : MonoBehaviour
     public AudioSource officeAudioSource;
     public AudioClip ventThumpSound; 
     public AudioClip breathingSound;  
+    public AudioClip cameraSound;
+
+    [Header("Jumpscare Settings")]
+    public UnityEngine.Video.VideoPlayer jumpscareVideoPlayer;
+    public AudioSource jumpscareAudioSource;
+    public AudioClip scareSound;
+
+    [Header("Game Over UI")]
+    public GameObject gameoverscreen;
 
     private float movementTimer = 0f;
     private float attackTimer = 0f;
     private bool isMainLightsOff = false;
     private bool isJumpscared = false;
+
+    public CameraGlitchEffect glitchSystem;
 
     void Start()
     {
@@ -83,6 +94,17 @@ public class FrozenFreddy : MonoBehaviour
             currentStage++;
             Debug.Log("Frozen Freddy advanced to Stage: " + currentStage);
 
+            CameraGlitchEffect glitchEffect = glitchSystem.GetComponent<CameraGlitchEffect>();
+            if (glitchEffect != null)
+            {
+                glitchEffect.TriggerGlitch(0.25f);
+            }
+
+            if (officeAudioSource != null && cameraSound != null)
+            {
+                officeAudioSource.PlayOneShot(cameraSound, 0.2f);
+            }
+
             TeleportFreddy();
 
             if (currentStage == 3)
@@ -129,6 +151,17 @@ public class FrozenFreddy : MonoBehaviour
         attackTimer = 0f;
         retreatTimer = 0f; // NEW: Reset our tracking timer
 
+        if (officeAudioSource != null && cameraSound != null)
+        {
+            officeAudioSource.PlayOneShot(cameraSound, 0.2f);
+        }
+
+        CameraGlitchEffect glitchEffect = glitchSystem.GetComponent<CameraGlitchEffect>();
+        if (glitchEffect != null)
+        {
+            glitchEffect.TriggerGlitch(0.25f);
+        }
+
         TeleportFreddy();
 
         if (officeAudioSource != null)
@@ -142,5 +175,26 @@ public class FrozenFreddy : MonoBehaviour
     {
         isJumpscared = true;
         Debug.Log("JUMPSCARE: Frozen Freddy got you from the vents!");
+        JumpscareVideo();
+    }
+
+    void JumpscareVideo()
+    {
+        if (jumpscareVideoPlayer != null)
+        {
+            jumpscareAudioSource.PlayOneShot(scareSound);
+            jumpscareVideoPlayer.Play();
+            Invoke("ShowGameOver", 3f);
+        }
+    }
+
+    void ShowGameOver()
+    {
+        if (gameoverscreen != null)
+        {
+            gameoverscreen.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
     }
 }

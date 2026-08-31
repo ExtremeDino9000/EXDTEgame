@@ -16,6 +16,15 @@ public class FrozenBonnie : MonoBehaviour
     public AudioSource officeAudioSource;
     public AudioClip movementSound;
 
+    [Header("Jumpscare Settings")]
+    public UnityEngine.Video.VideoPlayer jumpscareVideoPlayer;
+    public AudioSource jumpscareAudioSource;
+    public AudioClip scareSound;
+    public AudioClip cameraSound;
+
+    [Header("Game Over UI")]
+    public GameObject gameoverscreen;
+
     private int currentStage = 0;
     private float movementTimer;
     private float jumpscareTimer;
@@ -64,6 +73,12 @@ public class FrozenBonnie : MonoBehaviour
         if (roll <= AILevel)
         {
             PlayAdvanceSound();
+            CameraSound();
+            CameraGlitchEffect glitchEffect = glitchSystem.GetComponent<CameraGlitchEffect>();
+            if (glitchEffect != null)
+            {
+                glitchEffect.TriggerGlitch(0.25f);
+            }
             currentStage++;
             TeleportToStage(currentStage);
             Debug.Log($"Bonnie advanced to Stage {currentStage}!");
@@ -112,6 +127,7 @@ public class FrozenBonnie : MonoBehaviour
     {
         currentStage = 3;
         Debug.Log("GAME OVER: Frozen Bonnie jumpscared you through the hole!");
+        JumpscareVideo();
     }
 
     void PlayAdvanceSound()
@@ -120,5 +136,33 @@ public class FrozenBonnie : MonoBehaviour
         {
             officeAudioSource.PlayOneShot(movementSound, 0.1f);
         }
+    }
+
+    void JumpscareVideo()
+    {
+        if (jumpscareVideoPlayer != null)
+        {
+            jumpscareAudioSource.PlayOneShot(scareSound);
+            jumpscareVideoPlayer.Play();
+            Invoke("ShowGameOver", 3f);
+        }
+    }
+
+    void CameraSound()
+    {
+        if (jumpscareAudioSource != null && cameraSound != null)
+        {
+            jumpscareAudioSource.PlayOneShot(cameraSound, 0.2f);
+        }
+    }
+
+    void ShowGameOver()
+    {
+        if (gameoverscreen != null)
+        {
+            gameoverscreen.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
     }
 }
