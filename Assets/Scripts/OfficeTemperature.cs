@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Crucial for restarting the scene
+using UnityEngine.SceneManagement;
 
 public class OfficeTemperature : MonoBehaviour
 {
@@ -86,7 +86,7 @@ public class OfficeTemperature : MonoBehaviour
         isGameOver = true;
         Debug.Log("YOU FROZE TO DEATH! Game Over.");
 
-        // 1. Force the screen to be solid, opaque black
+        // Force the screen to be solid black
         if (fadeScreenImage != null)
         {
             fadeScreenImage.gameObject.SetActive(true);
@@ -94,14 +94,14 @@ public class OfficeTemperature : MonoBehaviour
             color.a = 1f;
             fadeScreenImage.color = color;
             
-            // Re-enable Raycast Target so the player can click the restart button!
+            // Re-enable Raycast Target so the player can click the restart button
             fadeScreenImage.raycastTarget = true; 
         }
 
-        // 2. Reveal the "You Died" text and the Restart Button
+        // Reveal the "You Died" text and the Restart Button
         if (gameOverUI != null) gameOverUI.SetActive(true);
 
-        // 3. STOP THE GAME CLOCK: This freezes AI, animations, and timers entirely!
+        // Stop the game clock
         Time.timeScale = 0f; 
     }
 

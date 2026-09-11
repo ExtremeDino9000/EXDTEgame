@@ -48,7 +48,7 @@ public class FrozenFreddy : MonoBehaviour
     {
         if (isJumpscared) return;
 
-        // 1. Regular Vent Movement (Stages 0 to 2)
+        // Vent Movement (Stages 0 to 2)
         if (currentStage < 3)
         {
             movementTimer += Time.deltaTime;
@@ -58,22 +58,21 @@ public class FrozenFreddy : MonoBehaviour
                 TryMoveFreddy();
             }
         }
-        // 2. Office Vent Danger Zone (Stage 3)
+        // Office Vent Danger Zone (Stage 3)
         else if (currentStage == 3)
         {
             if (isMainLightsOff)
             {
-                // NEW: Lights are off, so tick the retreat timer!
                 retreatTimer += Time.deltaTime;
                 
                 if (retreatTimer >= retreatDelay)
                 {
-                    ResetFreddy(); // He finally leaves after sitting in the dark
+                    ResetFreddy();
                 }
             }
             else
             {
-                // NEW: If the player turns the lights back ON too early, reset his retreat timer!
+                // If the player turns the lights back on too early, reset his retreat timer
                 retreatTimer = 0f;
 
                 // Lights are still on. Timer counts down to a jumpscare.
@@ -149,7 +148,7 @@ public class FrozenFreddy : MonoBehaviour
         Debug.Log("Frozen Freddy was fooled by the darkness and went back to the start.");
         currentStage = 0;
         attackTimer = 0f;
-        retreatTimer = 0f; // NEW: Reset our tracking timer
+        retreatTimer = 0f; // Reset tracking timer
 
         if (officeAudioSource != null && cameraSound != null)
         {
@@ -195,6 +194,17 @@ public class FrozenFreddy : MonoBehaviour
             gameoverscreen.SetActive(true);
         }
 
+        StopAllSounds();
+
         Time.timeScale = 0f;
+    }
+
+    void StopAllSounds()
+    {
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.Stop();
+        }
     }
 }

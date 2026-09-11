@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // REQUIRED for the New Input System
+using UnityEngine.InputSystem;
 
 public class FlashlightSystem : MonoBehaviour
 {
@@ -22,13 +22,12 @@ public class FlashlightSystem : MonoBehaviour
         if (flashlightLight != null)
             flashlightLight.enabled = false;
 
-        // Hide and lock cursor at start
         LockCursor(true);
     }
 
     void Update()
     {
-        // 1. Monitor Toggle (TAB key) using New Input System
+        // Monitor toggle (TAB key)
         if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             ToggleCameraView();
@@ -36,19 +35,18 @@ public class FlashlightSystem : MonoBehaviour
 
         if (!isCameraOpen)
         {
-            // 2. Flashlight Toggle (SPACEBAR key)
+            // Flashlight toggle (SPACEBAR key)
             if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
                 ToggleFlashlight();
             }
 
-            // 3. Interaction Check (LEFT MOUSE CLICK)
+            // Interaction check (Left mouse click)
             if (Mouse.current.leftButton.wasPressedThisFrame) 
             {
                 TryInteract();
             }
 
-            // 4. Constant Bonnie Check
             if (isFlashlightOn && cameraTransform != null)
             {
                 CheckForBonnie();

@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Using your New Input System!
+using UnityEngine.InputSystem;
 
 public class ChairInteraction : MonoBehaviour
 {
     [Header("References")]
-    public Transform sitViewPosition; // Drag your SitViewPosition object here
-    public Transform mainCamera;       // Drag your Main Camera here
+    public Transform sitViewPosition;
+    public Transform mainCamera;
     
     [Header("Settings")]
     public float interactionDistance = 3f;
@@ -15,11 +15,11 @@ public class ChairInteraction : MonoBehaviour
     private Quaternion originalCameraRotation;
     private bool isSitting = false;
     private bool isTransitioning = false;
-    private MonoBehaviour movementScript; // To temporarily freeze your walking script
+    private MonoBehaviour movementScript;
 
     void Start()
     {
-        // Automatically try to find your movement script on the camera or its parent
+        // Automatically try to find movement script on the camera or its parent
         if (mainCamera != null)
         {
             movementScript = mainCamera.GetComponent<MonoBehaviour>();
@@ -32,7 +32,7 @@ public class ChairInteraction : MonoBehaviour
 
     void Update()
     {
-        // Check for 'E' key press using the New Input System
+        // Check for E key press using the input system
         if (Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame && !isTransitioning)
         {
             if (isSitting)
@@ -45,7 +45,7 @@ public class ChairInteraction : MonoBehaviour
             }
         }
 
-        // Smoothly slide the camera into position
+        // Slide the camera into position
         if (isTransitioning)
         {
             HandleTransition();
@@ -54,20 +54,16 @@ public class ChairInteraction : MonoBehaviour
 
     void TryToSit()
     {
-        // Shoot a laser forward from the center of the screen to see if we are looking at the chair
         Ray ray = new Ray(mainCamera.position, mainCamera.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
-            // Check if the object we hit is our Chair
             if (hit.transform == transform || hit.transform.IsChildOf(transform))
             {
-                // Save original spot so we can stand back up later
                 originalCameraPosition = mainCamera.position;
                 originalCameraRotation = mainCamera.rotation;
 
-                // Disable player walking so they don't wander off while sitting
                 if (movementScript != null) movementScript.enabled = false;
 
                 isSitting = true;

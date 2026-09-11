@@ -3,9 +3,9 @@ using UnityEngine;
 public class FrozenBonnie : MonoBehaviour
 {
     [Header("Closet Waypoints")]
-    public Transform stage0_Back;   // Deep hidden spot in the closet
-    public Transform stage1_Middle; // Mid-way forward in the closet
-    public Transform stage2_Hole;   // Pressed right up against the office wall hole
+    public Transform stage0_Back;   // hidden spot in the closet
+    public Transform stage1_Middle; // Mid-way in the closet
+    public Transform stage2_Hole;   // Office wall hole
 
     [Header("Timing Settings")]
     public float movementInterval = 10f; // Tries to move every 10 seconds
@@ -40,7 +40,7 @@ public class FrozenBonnie : MonoBehaviour
 
     void Update()
     {
-        // 1. AI Routine: If he hasn't reached the hole yet, count down to move forward
+        // If he hasn't reached the hole yet, count down to move forward
         if (currentStage < 2)
         {
             movementTimer += Time.deltaTime;
@@ -50,7 +50,7 @@ public class FrozenBonnie : MonoBehaviour
                 TryToAdvance();
             }
         }
-        // 2. Danger Zone: If he is staring through the hole, start the kill timer
+        // If he is staring through the hole, start the kill timer
         else if (currentStage == 2)
         {
             jumpscareTimer += Time.deltaTime;
@@ -68,7 +68,7 @@ public class FrozenBonnie : MonoBehaviour
 
     void TryToAdvance()
     {
-        // Classic FNaF RNG: Roll a number between 1 and 20
+        // Roll a number between 1 and 20
         int roll = Random.Range(1, 21);
         if (roll <= AILevel)
         {
@@ -114,7 +114,6 @@ public class FrozenBonnie : MonoBehaviour
         }
     }
 
-    // Your Flashlight script will call this method when aiming at him
     public void SetBeingFlashed(bool state)
     {
         if (currentStage == 2)
@@ -163,6 +162,17 @@ public class FrozenBonnie : MonoBehaviour
             gameoverscreen.SetActive(true);
         }
 
+        StopAllSounds();
+
         Time.timeScale = 0f;
+    }
+
+    void StopAllSounds()
+    {
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.Stop();
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.Video;
 public class CameraFrozenFoxy : MonoBehaviour
 {
     [Header("References")]
-    public OfficeTemperature tempSystem; // Drag your object with the OfficeTemperature script here
+    public OfficeTemperature tempSystem;
     public VideoPlayer jumpscareVideo;
 
     [Header("UI Elements")]
@@ -19,10 +19,10 @@ public class CameraFrozenFoxy : MonoBehaviour
     public float maxAggressionBeforeJumpscare = 100f;
 
     [Header("Foxy Duplicates")]
-    public GameObject[] foxyStages; // This holds your 3 Foxy duplicates
-    private int currentStage = -1;  // Start at -1 so it forces the first update
+    public GameObject[] foxyStages;
+    private int currentStage = -1;
     
-    // How fast he gets mad per degree above 10°C
+    // How fast he gets mad per degree above 20°C
     public float aggressionMultiplier = 2f; 
 
     private bool isJumpscaring = false;
@@ -33,7 +33,7 @@ public class CameraFrozenFoxy : MonoBehaviour
 
         float currentTemp = tempSystem.GetTemperature();
 
-        // FOXY MECHANIC: Aggressive only if temperature is above 20°C
+        // Aggressive only if temperature is above 20°C
         if (currentTemp > 20f)
         {
             aggressionMeter += aggressionMultiplier * Time.deltaTime;
@@ -45,7 +45,7 @@ public class CameraFrozenFoxy : MonoBehaviour
         }
         else
         {
-            // If the player successfully cools the office below 20°C, Foxy calms down over time
+            // If the player cools the office below 20°C, Foxy calms down over time
             aggressionMeter -= 20f * Time.deltaTime;
             if (aggressionMeter < 0f) aggressionMeter = 0f;
         }
@@ -58,11 +58,10 @@ public class CameraFrozenFoxy : MonoBehaviour
     {
         int newStage = 0;
 
-        // Manually control the exact meter breaks
-        if (aggressionMeter >= 90f)       newStage = 3; // Gone / Running
-        else if (aggressionMeter >= 50f)  newStage = 2; // Standing outside (Stage 2)
-        else if (aggressionMeter >= 25f)  newStage = 1; // Peeking (Stage 1)
-        else                              newStage = 0; // Hidden (Stage 0)
+        if (aggressionMeter >= 90f)       newStage = 3;
+        else if (aggressionMeter >= 50f)  newStage = 2;
+        else if (aggressionMeter >= 25f)  newStage = 1;
+        else                              newStage = 0;
 
         if (newStage != currentStage)
         {
@@ -87,14 +86,12 @@ public class CameraFrozenFoxy : MonoBehaviour
         {
             jumpscareAudioSource.PlayOneShot(scareSound);
             jumpscareVideo.Play();
-            //jumpscareVideo.loopPointReached += OnJumpscareFinished;
             Invoke("ShowGameOver", 3f);
         }
     }
 
     void OnJumpscareFinished(VideoPlayer vp)
     {
-        //jumpscareVideo.loopPointReached -= OnJumpscareFinished;
         ShowGameOver();
     }
 

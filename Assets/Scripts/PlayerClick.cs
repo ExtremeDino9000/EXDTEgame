@@ -20,7 +20,6 @@ public class PlayerClick : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             RaycastHit hit;
 
-            // NEW: Added 'QueryTriggerInteraction.Collide' to force close-up detection if it's set to trigger
             if (Physics.Raycast(ray, out hit, maxInteractionDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide))
             {
                 BreakerSwitch switchScript = hit.transform.GetComponent<BreakerSwitch>();

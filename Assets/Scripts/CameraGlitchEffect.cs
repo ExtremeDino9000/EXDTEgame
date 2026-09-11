@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraGlitchEffect : MonoBehaviour
 {
     [Header("UI / Monitor Overlays")]
-    public GameObject[] monitorStaticOverlays; // Drag all 3 monitor static objects here
+    public GameObject[] monitorStaticOverlays;
 
     [Header("Sounds (Optional)")]
     public AudioSource staticAudioSource;
@@ -20,7 +20,7 @@ public class CameraGlitchEffect : MonoBehaviour
             }
         }
 
-        // Play audio glitch zap
+        // Play audio glitch sound
         if (staticAudioSource != null && staticZapSound != null)
         {
             staticAudioSource.PlayOneShot(staticZapSound);

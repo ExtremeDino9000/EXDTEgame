@@ -10,7 +10,11 @@ public class GameClock : MonoBehaviour
     [Header("Settings")]
     public float secondsPerHour = 60f; // 1 hour in-game = 60 real seconds
 
-    private int currentHour = 12;      // Start at 12 AM
+    [Header("Audio")]
+    public AudioSource winAudioSource;
+    public AudioClip winSound;
+
+    private int currentHour = 12; // Start at 12 AM
     private float hourTimer = 0f;
     private bool gameEnded = false;
 
@@ -62,7 +66,7 @@ public class GameClock : MonoBehaviour
 
     void UpdateClockDisplay()
     {
-        // Formats the display nicely (e.g., "12 AM", "1 AM")
+        // Formats the display nicely (12 AM, 1 AM)
         string amPm = (currentHour == 6 || currentHour < 6 || currentHour == 12) ? "AM" : "PM";
         clockText.text = currentHour + " " + amPm;
     }
@@ -72,18 +76,26 @@ public class GameClock : MonoBehaviour
         gameEnded = true;
         Debug.Log("6 AM! You survived the night!");
         
-        // 1. Show the victory screen overlay (turns on the black background and texts)
+        // Show the victory screen overlay (turns on the black background and texts)
         if (winScreenObject != null)
         {
             winScreenObject.SetActive(true);
         }
 
-        // 2. Free the mouse cursor so the player can safely exit to a menu
+        StopAllSounds();
+
+        // Play win audio
+        if (winAudioSource != null)
+        {
+            winAudioSource.PlayOneShot(winSound);
+        }
+
+        // Free the mouse cursor so the player can safely exit to a menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // 3. Disable camera movement scripts automatically
-        // This finds any custom scripts attached to your main camera and shuts them down
+        // Disable camera movement scripts automatically
+        // Finds any custom scripts attached to your main camera and shuts them down
         if (Camera.main != null)
         {
             MonoBehaviour[] cameraScripts = Camera.main.GetComponents<MonoBehaviour>();
@@ -96,7 +108,16 @@ public class GameClock : MonoBehaviour
             }
         }
 
-        // 4. Stop the game time completely
+        // Stop the game time completely
         Time.timeScale = 0f; 
+    }
+
+    void StopAllSounds()
+    {
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.Stop();
+        }
     }
 }

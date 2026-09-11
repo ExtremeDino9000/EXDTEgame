@@ -1,11 +1,11 @@
 using UnityEngine;
-using TMPro; // Crucial for talking to TextMeshPro elements
+using TMPro;
 
 public class OfficeUI : MonoBehaviour
 {
     [Header("References")]
-    public OfficeTemperature tempSystem; // Drag your object with the OfficeTemperature script here
-    public TextMeshProUGUI temperatureText; // Drag your TemperatureText UI object here
+    public OfficeTemperature tempSystem;
+    public TextMeshProUGUI temperatureText;
 
     void Update()
     {
@@ -14,13 +14,13 @@ public class OfficeUI : MonoBehaviour
             // Get the current temperature from the system
             float currentTemp = tempSystem.GetTemperature();
 
-            // Round it to a whole number so it doesn't show crazy decimals (e.g., 14.5323C)
+            // Round it to a whole number so it doesn't show decimals
             int roundedTemp = Mathf.RoundToInt(currentTemp);
 
             // Update the text on the player's screen
             temperatureText.text = "TEMP: " + roundedTemp + "°C";
 
-            // OPTIONAL COLOR CHANGE: Turn text red if Foxy is getting aggressive (> 10°C)
+            // Turn text red if Foxy is getting aggressive (> 20°C)
             if (currentTemp > 20f)
             {
                 temperatureText.color = Color.red;

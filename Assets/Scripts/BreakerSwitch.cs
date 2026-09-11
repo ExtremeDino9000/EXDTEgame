@@ -3,13 +3,14 @@ using UnityEngine;
 public class BreakerSwitch : MonoBehaviour
 {
     [Header("Lights to Control")]
-    public Light mainRoomLight; // Drag your main room light here
+    public Light mainRoomLight;
+    public Light sideLight;
 
     [Header("Enemy Reference")]
-    public FrozenFreddy frozenFreddyScript; // Drag your Frozen Freddy manager here
+    public FrozenFreddy frozenFreddyScript;
 
     [Header("Switch Settings")]
-    public Transform switchHandle; // OPTIONAL: Drag the moving part of the switch here
+    public Transform switchHandle;
     public float offRotationX = -30f;
     public float onRotationX = 30f;
 
@@ -21,15 +22,20 @@ public class BreakerSwitch : MonoBehaviour
 
     void Start()
     {
-        // Ensure the light matches our starting state
+        // Make sure the light matches the starting state
         if (mainRoomLight != null)
         {
             mainRoomLight.enabled = isLightOn;
         }
+
+        if (sideLight != null)
+        {
+            sideLight.enabled = isLightOn;
+        }
+
         UpdateSwitchVisual();
     }
 
-    // This is the function your interaction script needs to call!
     public void ToggleLight()
     {
         isLightOn = !isLightOn;
@@ -40,10 +46,13 @@ public class BreakerSwitch : MonoBehaviour
             mainRoomLight.enabled = isLightOn;
         }
 
-        // --- NEW: Tell Frozen Freddy if the main lights are OFF ---
+        if (sideLight != null)
+        {
+            sideLight.enabled = isLightOn;
+        }
+
         if (frozenFreddyScript != null)
         {
-            // If isLightOn is true, then areLightsOff is false (and vice versa)
             frozenFreddyScript.UpdateLightsState(!isLightOn);
         }
 

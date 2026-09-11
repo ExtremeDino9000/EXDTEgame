@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))] // Automatically ensures the poster has a speaker component
+[RequireComponent(typeof(AudioSource))]
 public class PosterEasterEgg : MonoBehaviour
 
 {
@@ -17,7 +17,7 @@ public class PosterEasterEgg : MonoBehaviour
 
     [Header("Settings")]
     [Range(0, 100)] public float chanceToChange = 5f; // % chance to change
-    public float checkInterval = 10f; // Checks every X seconds
+    public float checkInterval = 10f;
 
     private Renderer posterRenderer;
     private AudioSource audioSource;
@@ -29,11 +29,10 @@ public class PosterEasterEgg : MonoBehaviour
         posterRenderer = GetComponent<Renderer>();
         audioSource = GetComponent<AudioSource>();
         
-        // Setup audio source settings cleanly via code
         audioSource.playOnAwake = false;
         audioSource.loop = false;
 
-        // Ensure it starts with the normal texture
+        // Make sure it starts with the normal texture
         if (posterRenderer != null && normalTexture != null)
         {
             posterRenderer.material.mainTexture = normalTexture;
@@ -72,7 +71,7 @@ public class PosterEasterEgg : MonoBehaviour
             Debug.Log("The poster has changed...");
         }
 
-        // PLAY THE SOUND EFFECT
+        // Play sound effect
         if (audioSource != null && creepySound != null)
         {
             audioSource.PlayOneShot(creepySound);

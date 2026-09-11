@@ -10,7 +10,6 @@ public class OfficeManager : MonoBehaviour
     public float normalDrainRate = 0.5f;
     public float flashlightDrainRate = 2.0f;
     
-    // We made this public again so you can lock your specific spotlight in!
     [Header("References")]
     public Light officeFlashlight;
     
@@ -28,7 +27,7 @@ public class OfficeManager : MonoBehaviour
         if (powerText == null) Debug.LogWarning("OfficeManager couldn't find a UI Text element!");
         if (jumpscareVideoPlayer == null) Debug.LogWarning("OfficeManager couldn't find a VideoPlayer!");
         
-        // Force the assigned flashlight to start off
+        // Force the flashlight to start off
         if (officeFlashlight != null) officeFlashlight.enabled = false;
     }
 

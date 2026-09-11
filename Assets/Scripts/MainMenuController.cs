@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
     }
 
     public void QuitGame()
@@ -25,5 +26,10 @@ public class MainMenuController : MonoBehaviour
     public void BackToMainMenu()
     {
         creditsMenuObject.SetActive(false);
+    }
+
+    public void BackToMainMenuFromWinScreen()
+    {
+        SceneManager.LoadScene(0);
     }
 }
