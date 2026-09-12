@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.06289297, g: 0.06289297, b: 0.06289297, a: 1}
+  m_AmbientSkyColor: {r: 0.10950303, g: 0.10950303, b: 0.10950303, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -58840,7 +58840,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2bc0a3c14ddf7a64688cb8b10e0b6eea, type: 2}
+  - {fileID: 2100000, guid: b6accc33fa718bd4c87d1fca2ca066a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118965,7 +118965,7 @@ MonoBehaviour:
   minScale: {x: 4, y: 20, z: 4}
   globalVolume: {fileID: 139564840}
   minVignette: 0.2
-  maxVignette: 0.85
+  maxVignette: 1
   shrinkSpeed: 7
   pushbackSpeed: 25
   normalFOV: 60

@@ -90,7 +90,9 @@ public class VoidManager : MonoBehaviour
                     gameOverScreen.SetActive(true);
                 }   
                 
-                StopAllSounds();            
+                StopAllSounds();  
+
+            }          
         }
         else
         {

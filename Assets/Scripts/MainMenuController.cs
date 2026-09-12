@@ -5,6 +5,8 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("UI References")]
     public GameObject creditsMenuObject;
+    public GameObject helpMenuObject;
+    public GameObject extrasMenuObject;
 
     public void StartGame()
     {
@@ -23,9 +25,21 @@ public class MainMenuController : MonoBehaviour
         creditsMenuObject.SetActive(true);
     }
 
+    public void HelpMenu()
+    {
+        helpMenuObject.SetActive(true);
+    }
+
+    public void ExtrasMenu()
+    {
+        extrasMenuObject.SetActive(true);
+    }
+
     public void BackToMainMenu()
     {
         creditsMenuObject.SetActive(false);
+        helpMenuObject.SetActive(false);
+        extrasMenuObject.SetActive(false);
     }
 
     public void BackToMainMenuFromWinScreen()
