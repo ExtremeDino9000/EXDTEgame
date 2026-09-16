@@ -143,7 +143,7 @@ public class FrozenBonnie : MonoBehaviour
         {
             jumpscareAudioSource.PlayOneShot(scareSound);
             jumpscareVideoPlayer.Play();
-            Invoke("ShowGameOver", 3f);
+            Invoke("ShowGameOver", 4.5f);
         }
     }
 

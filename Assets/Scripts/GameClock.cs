@@ -5,22 +5,21 @@ public class GameClock : MonoBehaviour
 {
     [Header("UI References")]
     public TextMeshProUGUI clockText; 
-    public GameObject winScreenObject; // Drag your Win_Screen object here (the one with the black background)
+    public GameObject winScreenObject;
 
     [Header("Settings")]
-    public float secondsPerHour = 60f; // 1 hour in-game = 60 real seconds
+    public float secondsPerHour = 60f;
 
     [Header("Audio")]
     public AudioSource winAudioSource;
     public AudioClip winSound;
 
-    private int currentHour = 12; // Start at 12 AM
+    private int currentHour = 12;
     private float hourTimer = 0f;
     private bool gameEnded = false;
 
     void Start()
     {
-        // Make sure the win screen starts hidden
         if (winScreenObject != null) 
         {
             winScreenObject.SetActive(false);
@@ -66,7 +65,6 @@ public class GameClock : MonoBehaviour
 
     void UpdateClockDisplay()
     {
-        // Formats the display nicely (12 AM, 1 AM)
         string amPm = (currentHour == 6 || currentHour < 6 || currentHour == 12) ? "AM" : "PM";
         clockText.text = currentHour + " " + amPm;
     }
@@ -80,6 +78,8 @@ public class GameClock : MonoBehaviour
         if (winScreenObject != null)
         {
             winScreenObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+
         }
 
         StopAllSounds();
@@ -90,12 +90,10 @@ public class GameClock : MonoBehaviour
             winAudioSource.PlayOneShot(winSound);
         }
 
-        // Free the mouse cursor so the player can safely exit to a menu
+        // Free the mouse cursor so the player can exit to the menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Disable camera movement scripts automatically
-        // Finds any custom scripts attached to your main camera and shuts them down
         if (Camera.main != null)
         {
             MonoBehaviour[] cameraScripts = Camera.main.GetComponents<MonoBehaviour>();
@@ -108,7 +106,7 @@ public class GameClock : MonoBehaviour
             }
         }
 
-        // Stop the game time completely
+        // Stop the game time
         Time.timeScale = 0f; 
     }
 

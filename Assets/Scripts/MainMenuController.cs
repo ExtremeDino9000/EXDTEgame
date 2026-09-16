@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject creditsMenuObject;
     public GameObject helpMenuObject;
     public GameObject extrasMenuObject;
+    public GameObject optionsMenuObject;
 
     public void StartGame()
     {
@@ -35,11 +36,18 @@ public class MainMenuController : MonoBehaviour
         extrasMenuObject.SetActive(true);
     }
 
+    public void OptionsMenu()
+    {
+        optionsMenuObject.SetActive(true);
+    }
+
     public void BackToMainMenu()
     {
         creditsMenuObject.SetActive(false);
         helpMenuObject.SetActive(false);
         extrasMenuObject.SetActive(false);
+        optionsMenuObject.SetActive(false);
+
     }
 
     public void BackToMainMenuFromWinScreen()

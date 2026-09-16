@@ -23,7 +23,7 @@ public class SimplePanicBreathing : MonoBehaviour
         {
             ambientSource.clip = ambientClip;
             ambientSource.loop = true;
-            ambientSource.volume = 0f; // Start completely silent
+            ambientSource.volume = 0f;
             ambientSource.Play();
         }
 
@@ -33,15 +33,12 @@ public class SimplePanicBreathing : MonoBehaviour
 
     void Update()
     {
-        // Smoothly scale the ambient volume over the entire 180-second night
         if (ambientSource != null && ambientSource.isPlaying)
         {
             timeElapsed += Time.deltaTime;
             
-            // Calculate progress from 0.0 (12 AM) to 1.0 (6 AM)
             float nightProgress = Mathf.Clamp01(timeElapsed / nightDuration);
 
-            // Gradually ramp up volume toward maxAmbientVolume
             ambientSource.volume = nightProgress * maxAmbientVolume;
         }
     }
@@ -50,10 +47,10 @@ public class SimplePanicBreathing : MonoBehaviour
     {
         if (breathClip == null || breathingSource == null) return;
 
-        // Randomize pitch slightly for variation
-        breathingSource.pitch = Random.Range(0.8f, 1.2f);
+        // Randomize pitch
+        breathingSource.pitch = Random.Range(0.8f, 1.0f);
         
-        // Single volume setting for breathing
+        // Volume setting for breathing
         breathingSource.volume = 1.1f; 
 
         breathingSource.PlayOneShot(breathClip);

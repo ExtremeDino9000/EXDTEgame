@@ -183,7 +183,7 @@ public class FrozenFreddy : MonoBehaviour
         {
             jumpscareAudioSource.PlayOneShot(scareSound);
             jumpscareVideoPlayer.Play();
-            Invoke("ShowGameOver", 3f);
+            Invoke("ShowGameOver", 2f);
         }
     }
 
