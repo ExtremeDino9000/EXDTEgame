@@ -70961,7 +70961,7 @@ GameObject:
   - component: {fileID: 1302810765}
   - component: {fileID: 1302810764}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Particle System (Snow)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71678,7 +71678,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 5
     angle: 1
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -71686,7 +71686,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 5, y: 9, z: 5}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -114015,7 +114015,7 @@ GameObject:
   - component: {fileID: 1743083592}
   - component: {fileID: 1743083591}
   m_Layer: 0
-  m_Name: Particle System (1)
+  m_Name: Particle System (Dust)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125293,8 +125293,6 @@ MonoBehaviour:
   - {fileID: 322705477}
   - {fileID: 1940930089}
   - {fileID: 742026676}
-  staticAudioSource: {fileID: 0}
-  staticZapSound: {fileID: 0}
 --- !u!114 &2099454456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173487,6 +173485,6 @@ SceneRoots:
   - {fileID: 964628691}
   - {fileID: 906166859}
   - {fileID: 139564841}
-  - {fileID: 1302810766}
   - {fileID: 6116018314979109808}
+  - {fileID: 1302810766}
   - {fileID: 1743083593}

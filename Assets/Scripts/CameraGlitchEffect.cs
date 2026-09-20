@@ -5,10 +5,6 @@ public class CameraGlitchEffect : MonoBehaviour
     [Header("UI / Monitor Overlays")]
     public GameObject[] monitorStaticOverlays;
 
-    [Header("Sounds (Optional)")]
-    public AudioSource staticAudioSource;
-    public AudioClip staticZapSound;
-
     public void TriggerGlitch(float duration = 0.25f)
     {
         // Turn on static overlay for all monitors
@@ -18,12 +14,6 @@ public class CameraGlitchEffect : MonoBehaviour
             {
                 monitorStaticOverlays[i].SetActive(true);
             }
-        }
-
-        // Play audio glitch sound
-        if (staticAudioSource != null && staticZapSound != null)
-        {
-            staticAudioSource.PlayOneShot(staticZapSound);
         }
 
         // Automatically turn them all off after the delay
