@@ -5,6 +5,7 @@ public class BreakerSwitch : MonoBehaviour
     [Header("Lights to Control")]
     public Light mainRoomLight;
     public Light sideLight;
+    public Light hallwayLight;
 
     [Header("Enemy Reference")]
     public FrozenFreddy frozenFreddyScript;
@@ -49,6 +50,11 @@ public class BreakerSwitch : MonoBehaviour
         if (sideLight != null)
         {
             sideLight.enabled = isLightOn;
+        }
+
+        if (hallwayLight != null)
+        {
+            hallwayLight.enabled = isLightOn;
         }
 
         if (frozenFreddyScript != null)
