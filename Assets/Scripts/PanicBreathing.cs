@@ -5,14 +5,14 @@ public class SimplePanicBreathing : MonoBehaviour
     [Header("Breathing Settings")]
     public AudioSource breathingSource; 
     public AudioClip breathClip;        
-    public float startAfterSeconds = 120f;
+    public float startAfterSeconds = 180f;
     public float repeatInterval = 8f;      
 
     [Header("Ambient Sound Settings")]
     public AudioSource ambientSource;   
     public AudioClip ambientClip;       
     public float nightDuration = 180f;  
-    public float maxAmbientVolume = 1.0f; 
+    public float maxAmbientVolume = 0.5f; 
 
     private float timeElapsed = 0f;
 
@@ -48,7 +48,7 @@ public class SimplePanicBreathing : MonoBehaviour
         if (breathClip == null || breathingSource == null) return;
 
         // Randomize pitch
-        breathingSource.pitch = Random.Range(0.8f, 1.0f);
+        breathingSource.pitch = Random.Range(1.0f, 1.0f);
         
         // Volume setting for breathing
         breathingSource.volume = 1.1f; 
