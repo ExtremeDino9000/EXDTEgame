@@ -555,8 +555,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PIRATES COVE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
+  m_sharedMaterial: {fileID: 2455674717890449676, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -653,7 +653,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2455674717890449676, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6676,8 +6676,8 @@ MonoBehaviour:
 
     Order'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
+  m_sharedMaterial: {fileID: 2455674717890449676, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6774,7 +6774,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 2455674717890449676, guid: f2729558cc41dc14ebed152f7d63b0fb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6806,7 +6806,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301917145}
   m_LocalRotation: {x: 0.009161731, y: 0.72943306, z: 0.00001974252, w: 0.68399096}
-  m_LocalPosition: {x: 0, y: 0, z: -2.9303303}
+  m_LocalPosition: {x: 0, y: 0, z: -2.931}
   m_LocalScale: {x: 0.14372279, y: 0.14372276, z: 0.14372279}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6814,7 +6814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0.716, y: 93.688, z: 0.767}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.953598, y: 4.0212975}
+  m_AnchoredPosition: {x: -3.954, y: 3.987}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &311410835
@@ -121710,7 +121710,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 1522394488}
     randomDistribution: 1
@@ -187922,6 +187922,6 @@ SceneRoots:
   - {fileID: 1302810766}
   - {fileID: 1743083593}
   - {fileID: 252855600}
-  - {fileID: 1589693944}
   - {fileID: 261170598}
   - {fileID: 2099454450}
+  - {fileID: 1589693944}
