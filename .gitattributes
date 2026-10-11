@@ -1,1 +1,2 @@
 Assets/Videos/mainmenuvideo.mp4 filter=lfs diff=lfs merge=lfs -text
+Assets/Videos/DEEP_FREEZE_TITLE.mp4 filter=lfs diff=lfs merge=lfs -text
