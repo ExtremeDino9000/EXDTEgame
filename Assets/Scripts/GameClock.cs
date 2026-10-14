@@ -1,11 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Video;
 
 public class GameClock : MonoBehaviour
 {
     [Header("UI References")]
     public TextMeshProUGUI clockText; 
     public GameObject winScreenObject;
+    public GameObject mainCanvas;
+    public GameObject pauseManager;
+
+    [Header("Videos")]
+    public VideoPlayer cutsceneVideoPlayer;
 
     [Header("Settings")]
     public float secondsPerHour = 60f;
@@ -20,6 +27,11 @@ public class GameClock : MonoBehaviour
 
     void Start()
     {
+        if (cutsceneVideoPlayer != null)
+        {
+            cutsceneVideoPlayer.loopPointReached += OnVideoFinished;
+        }
+        
         if (winScreenObject != null) 
         {
             winScreenObject.SetActive(false);
@@ -73,26 +85,17 @@ public class GameClock : MonoBehaviour
     {
         gameEnded = true;
         Debug.Log("6 AM! You survived the night!");
-        
-        // Show the victory screen overlay (turns on the black background and texts)
-        if (winScreenObject != null)
-        {
-            winScreenObject.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
 
+        if (mainCanvas != null)
+        {
+            mainCanvas.SetActive(false);
         }
+
+        pauseManager.SetActive(false);
+        
+        PlayCutscene();
 
         StopAllSounds();
-
-        // Play win audio
-        if (winAudioSource != null)
-        {
-            winAudioSource.PlayOneShot(winSound);
-        }
-
-        // Free the mouse cursor so the player can exit to the menu
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
 
         if (Camera.main != null)
         {
@@ -108,6 +111,32 @@ public class GameClock : MonoBehaviour
 
         // Stop the game time
         Time.timeScale = 0f; 
+    }
+
+    void PlayCutscene()
+    {
+        if (cutsceneVideoPlayer != null)
+        {
+            cutsceneVideoPlayer.Play();
+        }
+    }
+
+    void OnVideoFinished(VideoPlayer vp)
+    {
+        Time.timeScale = 1f;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        SceneManager.LoadScene(0);
+    }
+
+    void OnDestroy()
+    {
+        if (cutsceneVideoPlayer != null)
+        {
+            cutsceneVideoPlayer.loopPointReached -= OnVideoFinished;
+        }
     }
 
     void StopAllSounds()
