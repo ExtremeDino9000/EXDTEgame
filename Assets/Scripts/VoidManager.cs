@@ -34,7 +34,6 @@ public class VoidManager : MonoBehaviour
     public float maxShakeIntensity = 0.08f;
     public float shakeSpeed = 25f;
 
-    // Post-Processing Overrides
     private Vignette vignette;
     private FilmGrain filmGrain;
     private ChromaticAberration chromaticAberration;

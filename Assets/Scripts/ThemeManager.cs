@@ -53,7 +53,6 @@ public class ThemeManager : MonoBehaviour
     public void ApplyTheme(string themeName)
     {
         currentTheme = themeName;
-        Debug.Log($"Applying theme: {currentTheme}");
 
         if (currentTheme == "Void")
         {

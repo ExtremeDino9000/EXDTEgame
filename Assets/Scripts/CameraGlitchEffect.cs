@@ -7,7 +7,6 @@ public class CameraGlitchEffect : MonoBehaviour
 
     public void TriggerGlitch(float duration = 0.25f)
     {
-        // Turn on static overlay for all monitors
         for (int i = 0; i < monitorStaticOverlays.Length; i++)
         {
             if (monitorStaticOverlays[i] != null)
@@ -16,7 +15,6 @@ public class CameraGlitchEffect : MonoBehaviour
             }
         }
 
-        // Automatically turn them all off after the delay
         CancelInvoke("HideGlitch");
         Invoke("HideGlitch", duration);
     }

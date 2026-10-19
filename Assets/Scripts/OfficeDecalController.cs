@@ -41,7 +41,6 @@ public class OfficeDecalController : MonoBehaviour
         {
             if (decal != null)
             {
-                // Decal Projectors use fadeFactor
                 decal.fadeFactor = alpha; 
             }
         }
