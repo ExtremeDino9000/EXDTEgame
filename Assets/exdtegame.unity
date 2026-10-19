@@ -22098,10 +22098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4512581173758547ba38539815ac916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChairInteraction
-  sitViewPosition: {fileID: 489610413}
-  mainCamera: {fileID: 5126527961097417284}
-  interactionDistance: 6
-  sitSpeed: 6
 --- !u!114 &629331892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181508,7 +181504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75f5eb28f87d314ca3325f298f1832c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerClick
-  maxInteractionDistance: 5
+  maxInteractionDistance: 1
 --- !u!114 &7990992056645047615
 MonoBehaviour:
   m_ObjectHideFlags: 0

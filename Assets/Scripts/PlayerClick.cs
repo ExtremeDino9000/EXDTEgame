@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerClick : MonoBehaviour
 {
     [Header("Interaction Settings")]
-    public float maxInteractionDistance = 3.5f; 
+    public float maxInteractionDistance = 1f; 
 
     void Update()
     {
